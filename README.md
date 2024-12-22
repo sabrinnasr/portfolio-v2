@@ -1,2 +1,2 @@
 # portfolio-v2
-Practicing my CSS, HTML and JavaScript habilitis + responsive website
+Practicing my CSS, HTML and JavaScript skills + responsive website

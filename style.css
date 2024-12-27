@@ -107,7 +107,7 @@ section {
     gap: 10rem;
 }
 
-.profile img {
+.profile-pic {
     width: 40vh;
     height: 40vh;
     border-radius: 50%;
@@ -175,13 +175,32 @@ section {
     transform:scale(1.1);
 }
 
+.arrow-container {
+    position: fixed;
+    bottom: 1rem; 
+    right: 1rem; 
+    padding: 0.5rem 1.5rem;
+    z-index: 1000; 
+}
+
+.img-arrow {
+    cursor: pointer; 
+    width: 36px; 
+    height: 36px;
+}
+
+.img-arrow:hover {
+    transform:scale(1.1);
+}
+
 .about {
     position: relative;
+    scroll-margin-top: 250px;
 }
 
 .text-p1 {
     text-align: center;
-    margin-top: -200px;
+    margin-top: -180px;
 }
 
 .text-h1 {
@@ -228,4 +247,86 @@ section {
     padding: 3rem;
     font-size: 1.2rem;
 }
+
+.tech-container {
+    text-align: center;
+    color: white;
+    scroll-margin-top: 250px;
+}
+  
+.technologies-h1 {
+    text-align: center;
+    margin-top: -250px;
+    font-size: 3rem;
+    color: gray;
+    margin-bottom: 3rem;
+}
+  
+.images-container {
+    display: flex;
+    gap: 54px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tech-box {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    opacity: 0;  
+    transition: transform 1s ease-out, opacity 1s ease-out, box-shadow 600ms ease-out;
+}
+
+.tech-box:hover {
+    transform: scale(1.1);
+    box-shadow: 
+      0 0 20px 10px var(--tech-color), 
+      0 0 40px 20px var(--tech-color)
+}
+  
+.tech-box:nth-child(1) {
+    --tech-color: rgb(255, 87, 51); 
+    transform: translateX(-100vw);  
+}
+  
+.tech-box:nth-child(2) {
+    --tech-color: rgb(0, 157, 255);  
+    transform: translateX(-100vw);  
+}
+
+.tech-box:nth-child(3) {
+    --tech-color: rgb(255, 221, 0); 
+    transform: translateX(100vw);  
+}
+  
+.tech-box:nth-child(4) {
+    --tech-color: rgb(97, 218, 251); 
+    transform: translateX(100vw);  
+}
+
+.tech-images {
+    height: 4rem;
+}
+
+.tech-box.left {
+    transform: translateX(-100vw);  
+}
+
+.tech-box.right {
+    transform: translateX(100vw);  
+}
+
+.tech-box.animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+  
 

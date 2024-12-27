@@ -39,7 +39,7 @@
 
     <section id="profile" class="profile">
         <div class="profile-container">
-            <img src="./images/image.JPG" alt="">
+            <img src="./images/image.JPG" alt="Profile pic" class="profile-pic">
 
             <div class="info-box">
 
@@ -58,12 +58,20 @@
                     <a href="https://github.com/sabrinnasr"><i class="fa-brands fa-github"></i></a>
                     <a href="https://www.linkedin.com/in/rodriguessabrina/"><i class="fa-brands fa-linkedin"></i></a>
                 </div>
-
             </div>
         </div>
+
+        <div class="arrow-container" onclick="scrollToTop()">
+            <img 
+                class="img-arrow"
+                src="./icons/arrow.png" 
+                alt="Arrow icon"
+            />
+        </div>
+        
     </section>
 
-    <section class="about">
+    <section class="about" id="about">
         <p class="text-p1">Get To Know More</p>
         <h1 class="text-h1">About Me</h1>
         <div class="section-container">
@@ -102,6 +110,24 @@
         </div>
       </section>
 
+      <section class="tech-container" id="technologies">
+        <h1 class="technologies-h1">Technologies</h1>
+        <div class="images-container">
+            <div class="tech-box">
+                <img src="./images/html-logo.png" alt="HTML logo" class="tech-images" />
+            </div>
+            <div class="tech-box">
+                <img src="./images/css-logo.svg" alt="CSS logo" class="tech-images" />
+            </div>
+            <div class="tech-box">
+                <img src="./images/JavaScript-logo.png" alt="JavaScript logo" class="tech-images" />
+            </div>
+            <div class="tech-box">
+                <img src="./images/react-logo.png" alt="React logo" class="tech-images" />
+            </div>
+        </div>
+      </section>
+      
     <script src="script.js"></script>
 </body>
 </html>

@@ -44,11 +44,109 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    window.addEventListener('scroll', animateTechBoxes);
+    window.addEventListener('scroll', animateTechBoxes)
 
-    animateTechBoxes();
-});
+    animateTechBoxes()
+})
 
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleContainer = document.getElementById('toggle-container')
+    const toggleSlider = document.getElementById('toggle-slider')
 
+    let isEnglish = false;  
+
+    function applyTranslation(content) {
+        for (const key in content) {
+            const element = document.getElementById(key);
+            if (element) {
+                if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+                    element.placeholder = content[key]
+                } else {
+                    element.innerHTML = content[key]
+                }
+            }
+        }
+    }
+
+    const ptContent = { 
+        "header-about": "Sobre",
+        "header-technologies": "Tecnologias",
+        "header-projects": "Projetos",
+        "header-contact": "Contato",
+        "header-visit-github": "Visitar Github",
+        "profile-hi": "Olá, eu sou",
+        "frontend-dev": "Desenvolvedora Frontend",
+        "view-cv": "Visualizar CV",
+        "contact-btn": "Contato",
+        "about-text": "Saiba mais",
+        "about-heading": "Sobre mim",
+        "experience-heading": "Experiência",
+        "experience-text": "2 anos <br/ >Programa de intercâmbio Cultural",
+        "education-heading": "Educação",
+        "about-paragraph": "Meu nome é Sabrina Rodrigues, sou do Rio Grande do Sul, Brasil, mas atualmente moro em Maryland, EUA. Trabalhei com atendimento ao cliente, onde aprendi muito sobre comunicação, resolução de problemas e trabalho em equipe. Nos últimos dois anos, participei de um programa de intercâmbio cultural que me deu a chance de crescer, me adaptar e ver as coisas de novas perspectivas. Durante esse tempo, estudei e melhorei minhas habilidades de programação, descobrindo minha paixão por criar interfaces modernas e eficientes, usando animações CSS para criar uma experiência de usuário mais imersiva e interativa. Embora seja uma programadora iniciante, estou focada em aprender e melhorar minhas habilidades com novas tecnologias. Estou empolgada para crescer como desenvolvedora e contribuir para projetos que inspirem e encantem os usuários.",
+        "technologies-heading": "Tecnologias",
+        "projects-title": "Projetos Recentes",
+        // "project-flickshelf-description":"",
+        // "project-whooshtimer-description": "",
+        // "project-xoboard-description": "",
+        "project-flickshelf":"Demostração",
+        "project-whooshtimer": "Demostração",
+        "project-xoboard": "Demostração",
+        "contact-title": "Meus contatos",
+        "find-me": "Me Encontre",
+        "contact-name": "Nome",
+        "contact-message": "Mensagem",
+        "contact-send": 'Enviar <i class="fa-regular fa-paper-plane"></i>',
+        "footer-about": "Sobre",
+        "footer-technologies": "Tecnologias",
+        "footer-projects": "Projetos",
+        "footer-contact": "Contato",
+    }
+
+    const enContent = {
+        "header-about": "About",
+        "header-technologies": "Technologies",
+        "header-projects": "Projects",
+        "header-contact": "Contact",  
+        "header-visit-github": "Visit Github",
+        "profile-hi": "Hi, I'm",
+        "frontend-dev": "Frontend Developer",
+        "view-cv": "View CV",
+        "contact-btn": "Contact",
+        "about-text": "Get To Know More",
+        "about-heading": "About Me",
+        "experience-heading": "Experience",
+        "experience-text": "2 years <br/ >Cultural Exchange Program",
+        "education-heading": "Education",
+        "about-paragraph": "My name is Sabrina Rodrigues, I'm based in Rio Grande do Sul, Brazil but currently living in Maryland, US. I used to work in customer service, where I learned a lot about communication, problem-solving, and working with people. Over the past two years, I've been on a cultural exchange program that gave me the chance to grow, adapt, and see things from new perspectives. During this time, I've been studying and improving my coding skills, discovering myself passionate about creating modern, efficient interfaces and I enjoy using CSS animations to create a more immersive and interactive user experience. While I'm a beginner programmer, I'm focused on learning and committed to improving my skills with new technologies. I'm excited to grow as a developer and contribute to projects that inspire and delight users.",
+        "technologies-heading": "Technologies",
+        "projects-title": "Recent Projects",
+        // "project-flickshelf-description":"",
+        // "project-whooshtimer-description": "",
+        // "project-xoboard-description": "",
+        "project-flickshelf":"Live Demo",
+        "project-whooshtimer": "Live Demo",
+        "project-xoboard": "Live Demo",
+        "contact-title": "Contact me",
+        "find-me": "Find Me",
+        "contact-name": "Name",
+        "contact-message": "Message",
+        "contact-send": 'Send <i class="fa-regular fa-paper-plane"></i>',
+        "footer-about": "About",
+        "footer-technologies": "Technologies",
+        "footer-projects": "Projects",
+        "footer-contact": "Contact" 
+    }
+
+    applyTranslation(ptContent)
+
+    toggleContainer.addEventListener('click', () => {
+        isEnglish = !isEnglish;
+        applyTranslation(isEnglish ? enContent : ptContent)
+        
+        toggleSlider.textContent = isEnglish ? "EN-US" : "PT-BR";
+        toggleContainer.classList.toggle('active')
+    })
+})
 
 

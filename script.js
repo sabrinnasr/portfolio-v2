@@ -13,6 +13,11 @@ function scrollToTop() {
     })
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    window.scrollTo({ top: 0, behavior: 'auto' })
+})
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const techBoxes = document.querySelectorAll('.tech-box')
     const technologiesSection = document.querySelector('.tech-container')

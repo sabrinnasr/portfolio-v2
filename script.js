@@ -1,3 +1,7 @@
+let isEnglish
+let ptContent = {}
+let enContent = {}
+
 const menuIcon = document.querySelector('#menu-icon');
 const navLinks = document.querySelector('.nav-links');
 
@@ -17,8 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top: 0, behavior: 'auto' })
 })
 
+function handleInputsValidationTranslations() {
+    const nameInput = document.getElementById('contact-name')
+    const emailInput = document.getElementById('contact-email')
+    const messageInput = document.getElementById('contact-message')
 
-document.addEventListener('DOMContentLoaded', function () {
+    nameInput.addEventListener('input', () => {
+        setValidationMessages(nameInput, emailInput, messageInput)
+        nameInput.reportValidity()
+    })
+
+    emailInput.addEventListener('input', () => {
+        setValidationMessages(nameInput, emailInput, messageInput)
+        emailInput.reportValidity()
+    })
+
+    messageInput.addEventListener('input', () => {
+        setValidationMessages(nameInput, emailInput, messageInput)
+        messageInput.reportValidity()
+    })
+
+    form.addEventListener('submit', (e) => {
+        setValidationMessages(nameInput, emailInput, messageInput)
+
+        if (!form.checkValidity()) {
+            e.preventDefault()
+        }
+    })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    handleInputsValidationTranslations()
+
     const techBoxes = document.querySelectorAll('.tech-box')
     const technologiesSection = document.querySelector('.tech-container')
     let hasAnimated = false;  
@@ -54,11 +88,27 @@ document.addEventListener('DOMContentLoaded', function () {
     animateTechBoxes()
 })
 
+function setValidationMessages(nameInput, emailInput, messageInput) {
+    if (isEnglish) {
+        nameInput.setCustomValidity(nameInput.validity.valueMissing ? "Please enter your name." : "")
+        emailInput.setCustomValidity(emailInput.validity.valueMissing ? "Please enter your email." : emailInput.validity.typeMismatch ? "Please enter a valid email address." : "")
+        messageInput.setCustomValidity(messageInput.validity.valueMissing ? "Please enter your message." : "")
+    } else {
+        nameInput.setCustomValidity(nameInput.validity.valueMissing ? "Por favor, insira seu nome." : "")
+        emailInput.setCustomValidity(emailInput.validity.valueMissing ? "Por favor, insira seu email." : emailInput.validity.typeMismatch ? "Por favor, insira um email válido." : "")
+        messageInput.setCustomValidity(messageInput.validity.valueMissing ? "Por favor, escreva sua mensagem." : "")
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    const nameInput = document.getElementById('contact-name')
+    const emailInput = document.getElementById('contact-email')
+    const messageInput = document.getElementById('contact-message')
+
     const toggleSlider = document.getElementById('toggle-slider')
     const flipCardInner = document.querySelector('.flip-card-inner')
 
-    let isEnglish = false;  
+    isEnglish = false;  
 
     function applyTranslation(content) {
         for (const key in content) {
@@ -73,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    const ptContent = { 
+    ptContent = { 
         "header-about": "Sobre",
         "header-technologies": "Tecnologias",
         "header-projects": "Projetos",
@@ -102,13 +152,15 @@ document.addEventListener('DOMContentLoaded', function() {
         "contact-name": "Nome",
         "contact-message": "Mensagem",
         "contact-send": 'Enviar <i class="fa-regular fa-paper-plane"></i>',
+        "toast_success": 'Sua mensagem foi enviada!',
+        "toast_error": 'Algo deu errado. Tente novamente.',
         "footer-about": "Sobre",
         "footer-technologies": "Tecnologias",
         "footer-projects": "Projetos",
         "footer-contact": "Contato",
     }
 
-    const enContent = {
+    enContent = {
         "header-about": "About",
         "header-technologies": "Technologies",
         "header-projects": "Projects",
@@ -137,6 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
         "contact-name": "Name",
         "contact-message": "Message",
         "contact-send": 'Send <i class="fa-regular fa-paper-plane"></i>',
+        "toast_success": 'Your message was sent!',
+        "toast_error": 'Something went wrong.',
         "footer-about": "About",
         "footer-technologies": "Technologies",
         "footer-projects": "Projects",
@@ -149,5 +203,52 @@ document.addEventListener('DOMContentLoaded', function() {
         isEnglish = !isEnglish;
         applyTranslation(isEnglish ? enContent : ptContent)
         flipCardInner.classList.toggle('flipped')
+        setValidationMessages(nameInput, emailInput, messageInput)
     })
+})
+
+const form = document.getElementById("contact-form")
+const toast = document.getElementById("toast")
+
+function showToast(type = "success") {
+    toast.textContent = isEnglish ? enContent.toast_success : ptContent.toast_success
+
+    if (type === 'error') {
+        toast.textContent = isEnglish ? enContent.toast_error : ptContent.toast_error
+    }
+
+    toast.className = `toast show ${type}`
+    toast.classList.remove("hidden")
+
+    setTimeout(() => {
+        toast.classList.remove("show")
+        setTimeout(() => toast.classList.add("hidden"), 300)
+    }, 5000)
+}
+
+form.addEventListener("submit", async function (e) {
+    e.preventDefault()
+
+    const formData = new FormData(form)
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        })
+
+        if (response.ok) {
+            showToast("success")
+            form.reset()
+        } else {
+            const data = await response.json();
+            const errorMessage = data.errors
+                ? data.errors.map(err => err.message).join(", ")
+                : "Something went wrong."
+            showToast("error")
+        }
+    } catch (error) {
+        showToast("error")
+    }
 })

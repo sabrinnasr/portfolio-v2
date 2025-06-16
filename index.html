@@ -204,18 +204,21 @@
                         <a href="https://www.linkedin.com/in/rodriguessabrina/" target="_blank">Linkedin</a> 
                     </p>
                 </div>
-                    <div class="form-control">
+                    <form action="https://formspree.io/f/xpwrrnvw" method="POST" class="form-control" id="contact-form">
+                         <div id="toast" class="toast hidden">Your message was sent!</div>
+
                         <div class="form-inputs">
-                            <input type="text" class="input-field" placeholder="Name" id="contact-name">
-                            <input type="text" class="input-field" placeholder="Email">
+                            <input type="text" name="name" class="input-field" placeholder="Name" id="contact-name" required>
+                            <input type="text" name="email" class="input-field" placeholder="Email" id="contact-email" required>
                         </div>
                         <div class="text-area">
-                            <textarea placeholder="Message" id="contact-message"></textarea>
+                            <textarea name="message" placeholder="Message" id="contact-message" required></textarea>
                         </div>
                         <div class="form-button">
-                            <div class="form-btn" id="contact-send">Send <i class="fa-regular fa-paper-plane"></i></div>
+                            <button type="submit" class="form-btn" id="contact-send">Send <i class="fa-regular fa-paper-plane"></i></button>
                         </div>
-                    </div>
+                    </form>
+
         </div>
       </section>
 

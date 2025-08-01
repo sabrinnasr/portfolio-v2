@@ -293,6 +293,10 @@ section {
     border-color: rgb(163, 163, 163);
     text-align: center;
 }
+
+.details-container img:hover {
+    transform: scale(1.1);
+}
   
 .section-container {
     gap: 4rem;
